@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duyên Xinh Channel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose:  #f2c4ce;
+    --blush: #fde8ed;
+    --nude:  #e8d5c4;
+    --cream: #fdf6f0;
+    --mink:  #9e7b6e;
+    --soft:  #c4a39a;
+    --text:  #5c3d35;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    min-height:100vh;
+    background: var(--cream);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, #f9d5df55 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, #e8d5c433 0%, transparent 60%);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--text);
+    display:flex; justify-content:center; align-items:flex-start;
+    padding: 48px 20px 64px;
+  }
+
+  .card { width:100%; max-width:400px; display:flex; flex-direction:column; align-items:center; animation: fadeUp .8s ease both; }
+
+  /* Avatar */
+  .avatar-wrap { position:relative; width:108px; height:108px; margin-bottom:20px; }
+  .avatar-wrap::before {
+    content:''; position:absolute; inset:-5px; border-radius:50%;
+    background: conic-gradient(var(--rose), var(--nude), var(--rose));
+    animation: spin 8s linear infinite;
+  }
+  .avatar {
+    position:relative; width:100%; height:100%; border-radius:50%;
+    background: linear-gradient(135deg, var(--blush), var(--nude));
+    border:4px solid var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    font-size:3rem; overflow:hidden; z-index:1;
+  }
+
+  /* Text */
+  .tagline { font-size:.75rem; font-weight:300; letter-spacing:.2em; text-transform:uppercase; color:var(--soft); margin-bottom:8px; }
+  h1 { font-family:'Playfair Display',serif; font-weight:400; font-size:1.95rem; letter-spacing:.02em; color:var(--text); text-align:center; line-height:1.2; margin-bottom:6px; }
+  h1 em { font-style:italic; color:var(--soft); }
+  .divider { width:48px; height:1px; background:linear-gradient(90deg,transparent,var(--rose),transparent); margin:14px 0 18px; }
+  .bio { font-size:.86rem; font-weight:300; color:var(--mink); text-align:center; line-height:1.7; max-width:300px; margin-bottom:32px; }
+
+  /* Buttons */
+  .links { width:100%; display:flex; flex-direction:column; gap:14px; }
+  .btn {
+    display:flex; align-items:center; gap:14px; width:100%;
+    padding:15px 22px; border-radius:100px;
+    background:rgba(255,255,255,.75); border:1px solid rgba(194,152,145,.25);
+    backdrop-filter:blur(8px); box-shadow:0 2px 16px rgba(158,123,110,.08);
+    font-family:'Be Vietnam Pro',sans-serif; font-size:.84rem; font-weight:400;
+    letter-spacing:.06em; color:var(--text); cursor:pointer; text-align:left;
+    transition:all .3s cubic-bezier(.25,.8,.25,1); position:relative; overflow:hidden;
+    animation: fadeUp .8s ease both;
+  }
+  .btn:nth-child(1){animation-delay:.15s} .btn:nth-child(2){animation-delay:.25s} .btn:nth-child(3){animation-delay:.35s}
+  .btn::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--rose),var(--nude)); opacity:0; transition:opacity .3s; border-radius:inherit; }
+  .btn:hover::after { opacity:1; }
+  .btn:hover { box-shadow:0 6px 24px rgba(242,196,206,.5); transform:translateY(-2px); }
+  .btn-icon { font-size:1.3rem; width:32px; text-align:center; flex-shrink:0; position:relative; z-index:1; }
+  .btn-label { flex:1; position:relative; z-index:1; }
+  .btn-arrow { font-size:.75rem; opacity:.4; transition:transform .3s,opacity .3s; position:relative; z-index:1; }
+  .btn:hover .btn-arrow { transform:translateX(4px); opacity:.8; }
+
+  /* Popup */
+  .overlay {
+    display:none; position:fixed; inset:0; z-index:100;
+    background:rgba(92,61,53,.35); backdrop-filter:blur(4px);
+    align-items:flex-end; justify-content:center;
+  }
+  .overlay.active { display:flex; animation: overlayIn .25s ease; }
+
+  .popup {
+    background:var(--cream); border-radius:24px 24px 0 0;
+    width:100%; max-width:480px; padding:20px 20px 36px;
+    animation: slideUp .32s cubic-bezier(.25,.8,.25,1);
+    position:relative; max-height:88vh; overflow-y:auto;
+  }
+
+  .popup-close {
+    position:absolute; top:14px; right:16px;
+    background:none; border:none; font-size:1.3rem;
+    color:var(--soft); cursor:pointer; line-height:1;
+  }
+  .popup-close:hover { color:var(--text); }
+
+  .popup-title { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--text); margin-bottom:16px; padding-right:28px; }
+
+  .products { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:16px; }
+
+  .product-card {
+    background:#fff; border-radius:14px; overflow:hidden;
+    border:1px solid rgba(194,152,145,.18);
+    box-shadow:0 2px 10px rgba(158,123,110,.07);
+    cursor:pointer; transition:transform .2s,box-shadow .2s;
+    text-decoration:none; color:inherit; display:flex; flex-direction:column;
+  }
+  .product-card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(242,196,206,.4); }
+
+  .product-img {
+    width:100%; aspect-ratio:1/1;
+    background:linear-gradient(135deg,var(--blush),var(--nude));
+    display:flex; align-items:center; justify-content:center; font-size:2.6rem;
+  }
+  .product-info { padding:10px; }
+  .product-name { font-size:.78rem; font-weight:500; line-height:1.4; margin-bottom:4px; color:var(--text); }
+  .product-price { font-size:.8rem; color:#e8526a; font-weight:500; }
+  .product-old   { font-size:.7rem; color:var(--soft); text-decoration:line-through; margin-left:4px; }
+
+  .popup-cta {
+    display:block; width:100%; padding:14px; border:none; border-radius:100px; cursor:pointer;
+    background:linear-gradient(135deg,var(--rose),#f4a7b5);
+    font-family:'Be Vietnam Pro',sans-serif; font-size:.88rem; font-weight:500;
+    color:var(--text); letter-spacing:.06em; transition:opacity .2s,transform .2s;
+  }
+  .popup-cta:hover { opacity:.88; transform:translateY(-1px); }
+
+  .footer { margin-top:40px; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--soft); opacity:.6; }
+
+  @keyframes fadeUp    { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes spin      { to{transform:rotate(360deg)} }
+  @keyframes overlayIn { from{opacity:0} to{opacity:1} }
+  @keyframes slideUp   { from{transform:translateY(100%)} to{transform:translateY(0)} }
+
+  @media(max-width:480px){ body{padding:36px 16px 48px} h1{font-size:1.7rem} }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="avatar-wrap"><div class="avatar">💅</div></div>
+
+  <p class="tagline">✦ Nail & Beauty ✦</p>
+  <h1>Duyên Xinh <em>Channel</em></h1>
+  <div class="divider"></div>
+  <p class="bio">Chia sẻ bí quyết làm đẹp từ đôi tay —<br>dụng cụ, sơn gel &amp; phụ kiện nail hot trend.</p>
+
+  <div class="links">
+    <button class="btn" onclick="openPopup('tools')">
+      <span class="btn-icon">🪄</span><span class="btn-label">Dụng cụ làm Nail</span><span class="btn-arrow">→</span>
+    </button>
+    <button class="btn" onclick="openPopup('gel')">
+      <span class="btn-icon">✨</span><span class="btn-label">Sơn Gel hot trend</span><span class="btn-arrow">→</span>
+    </button>
+    <button class="btn" onclick="openPopup('deco')">
+      <span class="btn-icon">🌸</span><span class="btn-label">Phụ kiện trang trí</span><span class="btn-arrow">→</span>
+    </button>
+  </div>
+
+  <p class="footer">© 2026 Duyên Xinh Channel</p>
+</div>
+
+<!-- Popup -->
+<div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
+  <div class="popup" id="popup">
+    <button class="popup-close" onclick="closePopup()">✕</button>
+    <p class="popup-title" id="popup-title"></p>
+    <div class="products" id="popup-products"></div>
+    <button class="popup-cta" onclick="goShop()">🛍 Xem tất cả trên Shopee →</button>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+// 💡 CHỈNH SỬA SẢN PHẨM TẠI ĐÂY
+// Mỗi item: emoji (ảnh đại diện), name, price, old (giá cũ, để "" nếu không có), link
+// ════════════════════════════════════════════════
+const DATA = {
+  tools: {
+    title: "🪄 Dụng cụ làm Nail",
+    shopLink: "#",  // 👈 link Shopee bộ sưu tập
+    items: [
+      { emoji:"🔧", name:"Máy mài nail không dây",     price:"185.000đ", old:"220.000đ", link:"#" },
+      { emoji:"✂️", name:"Kềm cắt da chuyên nghiệp",  price:"65.000đ",  old:"90.000đ",  link:"#" },
+      { emoji:"📦", name:"Bộ dũa nail 12 cây",         price:"45.000đ",  old:"",         link:"#" },
+      { emoji:"🖌",  name:"Cọ vẽ nail full set",        price:"75.000đ",  old:"100.000đ", link:"#" },
+    ]
+  },
+  gel: {
+    title: "✨ Sơn Gel hot trend",
+    shopLink: "#",
+    items: [
+      { emoji:"💅", name:"Gel Nude Milk 2025",          price:"55.000đ", old:"70.000đ", link:"#" },
+      { emoji:"🌹", name:"Gel đỏ cherry trending",      price:"55.000đ", old:"",        link:"#" },
+      { emoji:"🌈", name:"Gel ánh kim holographic",     price:"68.000đ", old:"85.000đ", link:"#" },
+      { emoji:"🤍", name:"Gel trắng sữa siêu mịn",     price:"55.000đ", old:"",        link:"#" },
+    ]
+  },
+  deco: {
+    title: "🌸 Phụ kiện trang trí",
+    shopLink: "#",
+    items: [
+      { emoji:"💎", name:"Đá rhinestone mix 12 màu",    price:"35.000đ", old:"50.000đ", link:"#" },
+      { emoji:"🌺", name:"Sticker 3D hoa nổi",          price:"25.000đ", old:"",        link:"#" },
+      { emoji:"⭐", name:"Foil lá vàng / bạc nail",     price:"30.000đ", old:"45.000đ", link:"#" },
+      { emoji:"🦋", name:"Charm bướm & kim loại",       price:"40.000đ", old:"60.000đ", link:"#" },
+    ]
+  }
+};
+// ════════════════════════════════════════════════
+
+let currentShopLink = "#";
+
+function openPopup(key) {
+  const d = DATA[key];
+  currentShopLink = d.shopLink;
+  document.getElementById('popup-title').textContent = d.title;
+  document.getElementById('popup-products').innerHTML = d.items.map(p => `
+    <a class="product-card" href="${p.link}" target="_blank" rel="noopener">
+      <div class="product-img">${p.emoji}</div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div>
+          <span class="product-price">${p.price}</span>
+          ${p.old ? `<span class="product-old">${p.old}</span>` : ''}
+        </div>
+      </div>
+    </a>`).join('');
+  document.getElementById('overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePopup() {
+  document.getElementById('overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('overlay')) closePopup();
+}
+
+function goShop() { window.open(currentShopLink, '_blank', 'noopener'); }
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
+</script>
+</body>
+</html>
