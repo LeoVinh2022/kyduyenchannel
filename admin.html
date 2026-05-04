@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quản lý — Duyên Xinh Channel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{ --rose:#f2c4ce; --blush:#fde8ed; --nude:#e8d5c4; --cream:#fdf6f0; --mink:#9e7b6e; --soft:#c4a39a; --text:#5c3d35; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{min-height:100vh;background:var(--cream);background-image:radial-gradient(ellipse 80% 60% at 50% -10%,#f9d5df55 0%,transparent 70%);font-family:'Be Vietnam Pro',sans-serif;color:var(--text);display:flex;justify-content:center;align-items:flex-start;padding:36px 16px 60px;}
+
+/* ── LOGIN ── */
+#login{width:100%;max-width:360px;background:#fff;border-radius:24px;padding:32px 24px;box-shadow:0 4px 32px rgba(158,123,110,.12);text-align:center;}
+#login h2{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:6px;}
+#login p{font-size:.82rem;color:var(--soft);margin-bottom:24px;}
+#login input{width:100%;padding:13px 16px;border-radius:12px;border:1px solid rgba(194,152,145,.3);font-family:'Be Vietnam Pro',sans-serif;font-size:.9rem;color:var(--text);background:var(--cream);outline:none;margin-bottom:12px;text-align:center;letter-spacing:.2em;}
+#login input:focus{border-color:var(--rose);}
+#login button{width:100%;padding:13px;border:none;border-radius:100px;background:linear-gradient(135deg,var(--rose),#f4a7b5);font-family:'Be Vietnam Pro',sans-serif;font-size:.9rem;font-weight:500;color:var(--text);cursor:pointer;transition:opacity .2s;}
+#login button:hover{opacity:.88;}
+#login .err{font-size:.8rem;color:#e8526a;margin-top:8px;min-height:20px;}
+
+/* ── ADMIN ── */
+#admin{display:none;width:100%;max-width:480px;}
+.admin-header{background:#fff;border-radius:20px;padding:20px;margin-bottom:16px;box-shadow:0 2px 16px rgba(158,123,110,.08);}
+.admin-header h2{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:2px;}
+.admin-header p{font-size:.78rem;color:var(--soft);}
+
+.tab-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.tab{padding:8px 18px;border-radius:100px;border:1px solid rgba(194,152,145,.3);background:transparent;font-family:'Be Vietnam Pro',sans-serif;font-size:.82rem;color:var(--mink);cursor:pointer;transition:all .2s;}
+.tab.active{background:var(--rose);border-color:var(--rose);color:var(--text);font-weight:500;}
+
+.admin-section{display:none;}
+.admin-section.active{display:block;}
+
+.section-card{background:#fff;border-radius:20px;padding:18px;margin-bottom:12px;box-shadow:0 2px 16px rgba(158,123,110,.08);}
+.section-label{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:8px;}
+.section-card input[type=url]{width:100%;padding:10px 14px;border-radius:12px;border:1px solid rgba(194,152,145,.3);font-family:'Be Vietnam Pro',sans-serif;font-size:.84rem;color:var(--text);background:var(--cream);outline:none;}
+.section-card input[type=url]:focus{border-color:var(--rose);}
+
+.product-list{display:flex;flex-direction:column;gap:12px;margin-bottom:12px;}
+.product-entry{background:var(--cream);border-radius:16px;padding:14px;border:1px solid rgba(194,152,145,.2);position:relative;}
+.product-entry-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.field{display:flex;flex-direction:column;gap:4px;}
+.field.full{grid-column:1/-1;}
+.field label{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);}
+.field input{padding:9px 12px;border-radius:10px;border:1px solid rgba(194,152,145,.25);font-family:'Be Vietnam Pro',sans-serif;font-size:.82rem;color:var(--text);background:#fff;outline:none;width:100%;}
+.field input:focus{border-color:var(--rose);}
+.field input::placeholder{color:var(--soft);opacity:.6;}
+.del-btn{position:absolute;top:10px;right:10px;background:none;border:none;font-size:1rem;cursor:pointer;color:var(--soft);line-height:1;}
+.del-btn:hover{color:#e8526a;}
+
+.add-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border-radius:12px;border:1.5px dashed rgba(194,152,145,.4);background:transparent;font-family:'Be Vietnam Pro',sans-serif;font-size:.84rem;color:var(--mink);cursor:pointer;transition:all .2s;}
+.add-btn:hover{border-color:var(--rose);color:var(--text);background:var(--blush);}
+
+.sticky-bottom{position:sticky;bottom:16px;display:flex;flex-direction:column;gap:10px;padding-top:8px;}
+.save-btn{padding:15px;border:none;border-radius:100px;cursor:pointer;background:linear-gradient(135deg,var(--rose),#f4a7b5);font-family:'Be Vietnam Pro',sans-serif;font-size:.92rem;font-weight:500;color:var(--text);letter-spacing:.06em;transition:opacity .2s,transform .2s;box-shadow:0 4px 20px rgba(242,196,206,.5);}
+.save-btn:hover{opacity:.88;transform:translateY(-1px);}
+.save-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.back-btn{padding:12px;border:1px solid rgba(194,152,145,.3);border-radius:100px;cursor:pointer;background:#fff;font-family:'Be Vietnam Pro',sans-serif;font-size:.84rem;color:var(--mink);transition:all .2s;text-align:center;text-decoration:none;display:block;}
+.back-btn:hover{border-color:var(--rose);color:var(--text);}
+
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;padding:10px 22px;border-radius:100px;font-size:.82rem;opacity:0;transition:all .3s;pointer-events:none;z-index:999;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.loading-dots::after{content:'';animation:dots 1.2s infinite;}
+@keyframes dots{0%{content:''}33%{content:'.'}66%{content:'..'}100%{content:'...'}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login">
+  <h2>✦ Duyên Xinh</h2>
+  <p>Đăng nhập để quản lý sản phẩm</p>
+  <input type="password" id="pw-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+  <button onclick="doLogin()">Đăng nhập</button>
+  <p class="err" id="err"></p>
+</div>
+
+<!-- ── ADMIN ── -->
+<div id="admin">
+  <div class="admin-header">
+    <h2>✦ Quản lý sản phẩm</h2>
+    <p>Lưu xong là khách thấy ngay, không cần làm gì thêm.</p>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('tools',this)">🪄 Dụng cụ</button>
+    <button class="tab" onclick="switchTab('gel',this)">✨ Sơn Gel</button>
+    <button class="tab" onclick="switchTab('deco',this)">🌸 Phụ kiện</button>
+  </div>
+
+  <!-- tools -->
+  <div class="admin-section active" id="tab-tools">
+    <div class="section-card">
+      <p class="section-label">Link bộ sưu tập Shopee</p>
+      <input type="url" id="shoplink-tools" placeholder="https://shopee.vn/...">
+    </div>
+    <div class="section-card">
+      <p class="section-label">Danh sách sản phẩm</p>
+      <div class="product-list" id="list-tools"></div>
+      <button class="add-btn" onclick="addItem('tools')">＋ Thêm sản phẩm</button>
+    </div>
+  </div>
+
+  <!-- gel -->
+  <div class="admin-section" id="tab-gel">
+    <div class="section-card">
+      <p class="section-label">Link bộ sưu tập Shopee</p>
+      <input type="url" id="shoplink-gel" placeholder="https://shopee.vn/...">
+    </div>
+    <div class="section-card">
+      <p class="section-label">Danh sách sản phẩm</p>
+      <div class="product-list" id="list-gel"></div>
+      <button class="add-btn" onclick="addItem('gel')">＋ Thêm sản phẩm</button>
+    </div>
+  </div>
+
+  <!-- deco -->
+  <div class="admin-section" id="tab-deco">
+    <div class="section-card">
+      <p class="section-label">Link bộ sưu tập Shopee</p>
+      <input type="url" id="shoplink-deco" placeholder="https://shopee.vn/...">
+    </div>
+    <div class="section-card">
+      <p class="section-label">Danh sách sản phẩm</p>
+      <div class="product-list" id="list-deco"></div>
+      <button class="add-btn" onclick="addItem('deco')">＋ Thêm sản phẩm</button>
+    </div>
+  </div>
+
+  <div class="sticky-bottom">
+    <button class="save-btn" id="save-btn" onclick="saveData()">💾 Lưu & Cập nhật ngay</button>
+    <a class="back-btn" href="index.html">← Xem trang khách hàng</a>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const BIN_ID  = '69f8464caaba8821976b6274';
+const API_KEY = '$2a$10$BQhpwoo3yV2TnM16E6mk6.kpzEBjHP492VPDROQ9d21NbErzrcHx.';
+const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+const HEADERS = {'Content-Type':'application/json','X-Master-Key':API_KEY};
+const PASSWORD = 'duyen2026'; // 👈 đổi mật khẩu tại đây nếu muốn
+const CATS = ['tools','gel','deco'];
+let DB = { tools:{shopLink:'',items:[]}, gel:{shopLink:'',items:[]}, deco:{shopLink:'',items:[]} };
+
+// ── LOGIN ──
+function doLogin() {
+  const val = document.getElementById('pw-input').value;
+  if (val === PASSWORD) {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('admin').style.display = 'block';
+    loadData();
+  } else {
+    document.getElementById('err').textContent = 'Sai mật khẩu, thử lại nhé!';
+    document.getElementById('pw-input').value = '';
+  }
+}
+
+// ── DATA ──
+async function loadData() {
+  try {
+    const r = await fetch(API_URL+'/latest', {headers:{'X-Master-Key':API_KEY}});
+    const j = await r.json();
+    if (j.record) DB = j.record;
+    renderAdmin();
+  } catch(e) { toast('❌ Không tải được dữ liệu.'); }
+}
+
+async function saveData() {
+  collectFromForm();
+  const btn = document.getElementById('save-btn');
+  btn.disabled = true; btn.innerHTML = '<span class="loading-dots">Đang lưu</span>';
+  try {
+    const r = await fetch(API_URL, {method:'PUT', headers:HEADERS, body:JSON.stringify(DB)});
+    if (!r.ok) throw new Error();
+    toast('✅ Đã lưu! Khách hàng thấy ngay rồi.');
+  } catch(e) { toast('❌ Lỗi kết nối, thử lại nhé.'); }
+  finally { btn.disabled=false; btn.textContent='💾 Lưu & Cập nhật ngay'; }
+}
+
+// ── RENDER ──
+function renderAdmin() {
+  CATS.forEach(key => {
+    document.getElementById('shoplink-'+key).value = DB[key].shopLink || '';
+    const list = document.getElementById('list-'+key);
+    list.innerHTML = '';
+    (DB[key].items||[]).forEach((_,i) => appendItemRow(key,i));
+  });
+}
+
+function appendItemRow(key, i) {
+  const item = (DB[key].items||[])[i] || {};
+  const el = document.createElement('div');
+  el.className = 'product-entry';
+  el.dataset.idx = i;
+  el.innerHTML = `
+    <button class="del-btn" onclick="removeItem('${key}',${i})">🗑</button>
+    <div class="product-entry-grid">
+      <div class="field full">
+        <label>Tên sản phẩm</label>
+        <input type="text" name="name" value="${esc(item.name||'')}" placeholder="Ví dụ: Sơn gel đỏ cherry">
+      </div>
+      <div class="field">
+        <label>Giá bán</label>
+        <input type="text" name="price" value="${esc(item.price||'')}" placeholder="55.000đ">
+      </div>
+      <div class="field">
+        <label>Giá cũ (nếu có)</label>
+        <input type="text" name="old" value="${esc(item.old||'')}" placeholder="70.000đ">
+      </div>
+      <div class="field full">
+        <label>Link ảnh (copy từ Shopee)</label>
+        <input type="url" name="img" value="${esc(item.img||'')}" placeholder="https://down-vn.img.susercontent.com/...">
+      </div>
+      <div class="field full">
+        <label>Link sản phẩm Shopee</label>
+        <input type="url" name="link" value="${esc(item.link||'')}" placeholder="https://shopee.vn/...">
+      </div>
+    </div>`;
+  document.getElementById('list-'+key).appendChild(el);
+}
+
+function addItem(key) {
+  if (!DB[key].items) DB[key].items = [];
+  DB[key].items.push({name:'',price:'',old:'',img:'',link:''});
+  appendItemRow(key, DB[key].items.length-1);
+  document.getElementById('list-'+key).lastElementChild.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function removeItem(key, i) {
+  collectFromForm();
+  DB[key].items.splice(i,1);
+  document.getElementById('list-'+key).innerHTML='';
+  DB[key].items.forEach((_,idx)=>appendItemRow(key,idx));
+}
+
+function collectFromForm() {
+  CATS.forEach(key => {
+    DB[key].shopLink = document.getElementById('shoplink-'+key).value.trim();
+    DB[key].items = Array.from(document.querySelectorAll(`#list-${key} .product-entry`)).map(row=>({
+      name:  row.querySelector('[name=name]').value.trim(),
+      price: row.querySelector('[name=price]').value.trim(),
+      old:   row.querySelector('[name=old]').value.trim(),
+      img:   row.querySelector('[name=img]').value.trim(),
+      link:  row.querySelector('[name=link]').value.trim(),
+    }));
+  });
+}
+
+// ── TAB ──
+function switchTab(key, el) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-'+key).classList.add('active');
+}
+
+// ── HELPERS ──
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3000); }
+</script>
+</body>
+</html>

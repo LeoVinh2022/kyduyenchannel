@@ -6,141 +6,57 @@
 <title>Duyên Xinh Channel</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --rose:#f2c4ce; --blush:#fde8ed; --nude:#e8d5c4;
-  --cream:#fdf6f0; --mink:#9e7b6e; --soft:#c4a39a; --text:#5c3d35;
-}
+:root{ --rose:#f2c4ce; --blush:#fde8ed; --nude:#e8d5c4; --cream:#fdf6f0; --mink:#9e7b6e; --soft:#c4a39a; --text:#5c3d35; }
 *{margin:0;padding:0;box-sizing:border-box;}
-
-body {
-  min-height:100vh; background:var(--cream);
-  background-image:
-    radial-gradient(ellipse 80% 60% at 50% -10%,#f9d5df55 0%,transparent 70%),
-    radial-gradient(ellipse 60% 40% at 80% 100%,#e8d5c433 0%,transparent 60%);
-  font-family:'Be Vietnam Pro',sans-serif; color:var(--text);
-  display:flex; justify-content:center; align-items:flex-start; padding:48px 20px 64px;
-}
-
-/* ── LANDING ── */
-#landing { width:100%; max-width:400px; display:flex; flex-direction:column; align-items:center; animation:fadeUp .8s ease both; }
-
-.avatar-wrap { position:relative; width:108px; height:108px; margin-bottom:20px; }
-.avatar-wrap::before { content:''; position:absolute; inset:-5px; border-radius:50%; background:conic-gradient(var(--rose),var(--nude),var(--rose)); animation:spin 8s linear infinite; }
-.avatar { position:relative; width:100%; height:100%; border-radius:50%; background:linear-gradient(135deg,var(--blush),var(--nude)); border:4px solid var(--cream); display:flex; align-items:center; justify-content:center; font-size:3rem; overflow:hidden; z-index:1; }
-.avatar img { width:100%; height:100%; object-fit:cover; }
-
-.tagline { font-size:.75rem; font-weight:300; letter-spacing:.2em; text-transform:uppercase; color:var(--soft); margin-bottom:8px; }
-h1 { font-family:'Playfair Display',serif; font-weight:400; font-size:1.95rem; letter-spacing:.02em; color:var(--text); text-align:center; line-height:1.2; margin-bottom:6px; }
-h1 em { font-style:italic; color:var(--soft); }
-.divider { width:48px; height:1px; background:linear-gradient(90deg,transparent,var(--rose),transparent); margin:14px 0 18px; }
-.bio { font-size:.86rem; font-weight:300; color:var(--mink); text-align:center; line-height:1.7; max-width:300px; margin-bottom:32px; }
-
-.links { width:100%; display:flex; flex-direction:column; gap:14px; }
-.btn {
-  display:flex; align-items:center; gap:14px; width:100%;
-  padding:15px 22px; border-radius:100px;
-  background:rgba(255,255,255,.75); border:1px solid rgba(194,152,145,.25);
-  backdrop-filter:blur(8px); box-shadow:0 2px 16px rgba(158,123,110,.08);
-  font-family:'Be Vietnam Pro',sans-serif; font-size:.84rem; font-weight:400;
-  letter-spacing:.06em; color:var(--text); cursor:pointer; text-align:left;
-  transition:all .3s cubic-bezier(.25,.8,.25,1); position:relative; overflow:hidden;
-  animation:fadeUp .8s ease both;
-}
+body{min-height:100vh;background:var(--cream);background-image:radial-gradient(ellipse 80% 60% at 50% -10%,#f9d5df55 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 80% 100%,#e8d5c433 0%,transparent 60%);font-family:'Be Vietnam Pro',sans-serif;color:var(--text);display:flex;justify-content:center;align-items:flex-start;padding:48px 20px 64px;}
+.card{width:100%;max-width:400px;display:flex;flex-direction:column;align-items:center;animation:fadeUp .8s ease both;}
+.avatar-wrap{position:relative;width:108px;height:108px;margin-bottom:20px;}
+.avatar-wrap::before{content:'';position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(var(--rose),var(--nude),var(--rose));animation:spin 8s linear infinite;}
+.avatar{position:relative;width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--blush),var(--nude));border:4px solid var(--cream);display:flex;align-items:center;justify-content:center;font-size:3rem;overflow:hidden;z-index:1;}
+.avatar img{width:100%;height:100%;object-fit:cover;}
+.tagline{font-size:.75rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);margin-bottom:8px;}
+h1{font-family:'Playfair Display',serif;font-weight:400;font-size:1.95rem;letter-spacing:.02em;color:var(--text);text-align:center;line-height:1.2;margin-bottom:6px;}
+h1 em{font-style:italic;color:var(--soft);}
+.divider{width:48px;height:1px;background:linear-gradient(90deg,transparent,var(--rose),transparent);margin:14px 0 18px;}
+.bio{font-size:.86rem;font-weight:300;color:var(--mink);text-align:center;line-height:1.7;max-width:300px;margin-bottom:32px;}
+.links{width:100%;display:flex;flex-direction:column;gap:14px;}
+.btn{display:flex;align-items:center;gap:14px;width:100%;padding:15px 22px;border-radius:100px;background:rgba(255,255,255,.75);border:1px solid rgba(194,152,145,.25);backdrop-filter:blur(8px);box-shadow:0 2px 16px rgba(158,123,110,.08);font-family:'Be Vietnam Pro',sans-serif;font-size:.84rem;font-weight:400;letter-spacing:.06em;color:var(--text);cursor:pointer;text-align:left;transition:all .3s cubic-bezier(.25,.8,.25,1);position:relative;overflow:hidden;animation:fadeUp .8s ease both;}
 .btn:nth-child(1){animation-delay:.15s}.btn:nth-child(2){animation-delay:.25s}.btn:nth-child(3){animation-delay:.35s}
-.btn::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--rose),var(--nude)); opacity:0; transition:opacity .3s; border-radius:inherit; }
-.btn:hover::after { opacity:1; }
-.btn:hover { box-shadow:0 6px 24px rgba(242,196,206,.5); transform:translateY(-2px); }
-.btn-icon { font-size:1.3rem; width:32px; text-align:center; flex-shrink:0; position:relative; z-index:1; }
-.btn-label { flex:1; position:relative; z-index:1; }
-.btn-arrow { font-size:.75rem; opacity:.4; transition:transform .3s,opacity .3s; position:relative; z-index:1; }
-.btn:hover .btn-arrow { transform:translateX(4px); opacity:.8; }
-
-.footer { margin-top:40px; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--soft); opacity:.6; }
-
-/* ── PRODUCT POPUP ── */
-.overlay { display:none; position:fixed; inset:0; z-index:100; background:rgba(92,61,53,.35); backdrop-filter:blur(4px); align-items:flex-end; justify-content:center; }
-.overlay.active { display:flex; animation:overlayIn .25s ease; }
-.popup { background:var(--cream); border-radius:24px 24px 0 0; width:100%; max-width:480px; padding:20px 20px 36px; animation:slideUp .32s cubic-bezier(.25,.8,.25,1); position:relative; max-height:88vh; overflow-y:auto; }
-.popup-close { position:absolute; top:14px; right:16px; background:none; border:none; font-size:1.3rem; color:var(--soft); cursor:pointer; line-height:1; }
-.popup-close:hover { color:var(--text); }
-.popup-title { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--text); margin-bottom:16px; padding-right:28px; }
-.products { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:16px; }
-.product-card { background:#fff; border-radius:14px; overflow:hidden; border:1px solid rgba(194,152,145,.18); box-shadow:0 2px 10px rgba(158,123,110,.07); cursor:pointer; transition:transform .2s,box-shadow .2s; text-decoration:none; color:inherit; display:flex; flex-direction:column; }
-.product-card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(242,196,206,.4); }
-.product-img { width:100%; aspect-ratio:1/1; background:linear-gradient(135deg,var(--blush),var(--nude)); display:flex; align-items:center; justify-content:center; font-size:2.6rem; overflow:hidden; }
-.product-img img { width:100%; height:100%; object-fit:cover; }
-.product-info { padding:10px; }
-.product-name { font-size:.78rem; font-weight:500; line-height:1.4; margin-bottom:4px; color:var(--text); }
-.product-price { font-size:.8rem; color:#e8526a; font-weight:500; }
-.product-old { font-size:.7rem; color:var(--soft); text-decoration:line-through; margin-left:4px; }
-.popup-cta { display:block; width:100%; padding:14px; border:none; border-radius:100px; cursor:pointer; background:linear-gradient(135deg,var(--rose),#f4a7b5); font-family:'Be Vietnam Pro',sans-serif; font-size:.88rem; font-weight:500; color:var(--text); letter-spacing:.06em; transition:opacity .2s,transform .2s; }
-.popup-cta:hover { opacity:.88; transform:translateY(-1px); }
-
-/* ── ADMIN PANEL ── */
-#admin {
-  display:none; width:100%; max-width:480px;
-  background:#fff; border-radius:24px; padding:24px 20px 36px;
-  box-shadow:0 4px 32px rgba(158,123,110,.12);
-}
-#admin h2 { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--text); margin-bottom:4px; }
-#admin .admin-sub { font-size:.78rem; color:var(--soft); margin-bottom:20px; }
-
-.tab-bar { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
-.tab { padding:7px 16px; border-radius:100px; border:1px solid rgba(194,152,145,.3); background:transparent; font-family:'Be Vietnam Pro',sans-serif; font-size:.8rem; color:var(--mink); cursor:pointer; transition:all .2s; }
-.tab.active { background:var(--rose); border-color:var(--rose); color:var(--text); font-weight:500; }
-
-.admin-section { display:none; }
-.admin-section.active { display:block; }
-
-.section-label { font-size:.75rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--soft); margin-bottom:10px; }
-.shop-link-row { display:flex; flex-direction:column; gap:6px; margin-bottom:20px; }
-.shop-link-row input { padding:10px 14px; border-radius:12px; border:1px solid rgba(194,152,145,.3); font-family:'Be Vietnam Pro',sans-serif; font-size:.84rem; color:var(--text); background:#fdf6f0; outline:none; width:100%; }
-.shop-link-row input:focus { border-color:var(--rose); }
-
-.product-list { display:flex; flex-direction:column; gap:12px; margin-bottom:16px; }
-
-.product-entry {
-  background:var(--cream); border-radius:16px; padding:14px;
-  border:1px solid rgba(194,152,145,.2); position:relative;
-}
-.product-entry-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-.field { display:flex; flex-direction:column; gap:4px; }
-.field.full { grid-column:1/-1; }
-.field label { font-size:.7rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); }
-.field input { padding:9px 12px; border-radius:10px; border:1px solid rgba(194,152,145,.25); font-family:'Be Vietnam Pro',sans-serif; font-size:.82rem; color:var(--text); background:#fff; outline:none; width:100%; }
-.field input:focus { border-color:var(--rose); }
-.field input::placeholder { color:var(--soft); opacity:.7; }
-
-.del-btn { position:absolute; top:10px; right:10px; background:none; border:none; font-size:1rem; cursor:pointer; color:var(--soft); line-height:1; }
-.del-btn:hover { color:#e8526a; }
-
-.add-btn { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:11px; border-radius:12px; border:1.5px dashed rgba(194,152,145,.4); background:transparent; font-family:'Be Vietnam Pro',sans-serif; font-size:.82rem; color:var(--mink); cursor:pointer; transition:all .2s; }
-.add-btn:hover { border-color:var(--rose); color:var(--text); background:var(--blush); }
-
-.admin-actions { display:flex; flex-direction:column; gap:10px; margin-top:24px; }
-.save-btn { padding:14px; border:none; border-radius:100px; cursor:pointer; background:linear-gradient(135deg,var(--rose),#f4a7b5); font-family:'Be Vietnam Pro',sans-serif; font-size:.9rem; font-weight:500; color:var(--text); letter-spacing:.06em; transition:opacity .2s,transform .2s; }
-.save-btn:hover { opacity:.88; transform:translateY(-1px); }
-.save-btn:disabled { opacity:.5; cursor:not-allowed; transform:none; }
-.back-btn { padding:12px; border:1px solid rgba(194,152,145,.3); border-radius:100px; cursor:pointer; background:transparent; font-family:'Be Vietnam Pro',sans-serif; font-size:.84rem; color:var(--mink); transition:all .2s; }
-.back-btn:hover { border-color:var(--rose); color:var(--text); }
-
-.toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--text); color:#fff; padding:10px 22px; border-radius:100px; font-size:.82rem; opacity:0; transition:all .3s; pointer-events:none; z-index:999; white-space:nowrap; }
-.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
-
-.loading-dots::after { content:''; animation:dots 1.2s infinite; }
-@keyframes dots { 0%{content:''} 33%{content:'.'} 66%{content:'..'} 100%{content:'...'} }
-
-@keyframes fadeUp    { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-@keyframes spin      { to{transform:rotate(360deg)} }
-@keyframes overlayIn { from{opacity:0} to{opacity:1} }
-@keyframes slideUp   { from{transform:translateY(100%)} to{transform:translateY(0)} }
-@media(max-width:480px){ body{padding:36px 16px 48px} h1{font-size:1.7rem} }
+.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--rose),var(--nude));opacity:0;transition:opacity .3s;border-radius:inherit;}
+.btn:hover::after{opacity:1;}
+.btn:hover{box-shadow:0 6px 24px rgba(242,196,206,.5);transform:translateY(-2px);}
+.btn-icon{font-size:1.3rem;width:32px;text-align:center;flex-shrink:0;position:relative;z-index:1;}
+.btn-label{flex:1;position:relative;z-index:1;}
+.btn-arrow{font-size:.75rem;opacity:.4;transition:transform .3s,opacity .3s;position:relative;z-index:1;}
+.btn:hover .btn-arrow{transform:translateX(4px);opacity:.8;}
+.footer{margin-top:40px;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);opacity:.6;}
+/* Popup */
+.overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(92,61,53,.35);backdrop-filter:blur(4px);align-items:flex-end;justify-content:center;}
+.overlay.active{display:flex;animation:overlayIn .25s ease;}
+.popup{background:var(--cream);border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:20px 20px 36px;animation:slideUp .32s cubic-bezier(.25,.8,.25,1);position:relative;max-height:88vh;overflow-y:auto;}
+.popup-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.3rem;color:var(--soft);cursor:pointer;line-height:1;}
+.popup-close:hover{color:var(--text);}
+.popup-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text);margin-bottom:16px;padding-right:28px;}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;}
+.product-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid rgba(194,152,145,.18);box-shadow:0 2px 10px rgba(158,123,110,.07);cursor:pointer;transition:transform .2s,box-shadow .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column;}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(242,196,206,.4);}
+.product-img{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,var(--blush),var(--nude));display:flex;align-items:center;justify-content:center;font-size:2.6rem;overflow:hidden;}
+.product-img img{width:100%;height:100%;object-fit:cover;}
+.product-info{padding:10px;}
+.product-name{font-size:.78rem;font-weight:500;line-height:1.4;margin-bottom:4px;color:var(--text);}
+.product-price{font-size:.8rem;color:#e8526a;font-weight:500;}
+.product-old{font-size:.7rem;color:var(--soft);text-decoration:line-through;margin-left:4px;}
+.popup-cta{display:block;width:100%;padding:14px;border:none;border-radius:100px;cursor:pointer;background:linear-gradient(135deg,var(--rose),#f4a7b5);font-family:'Be Vietnam Pro',sans-serif;font-size:.88rem;font-weight:500;color:var(--text);letter-spacing:.06em;transition:opacity .2s,transform .2s;}
+.popup-cta:hover{opacity:.88;transform:translateY(-1px);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes overlayIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@media(max-width:480px){body{padding:36px 16px 48px}h1{font-size:1.7rem}}
 </style>
 </head>
 <body>
-
-<!-- ══ LANDING PAGE ══ -->
-<div id="landing">
+<div class="card">
   <div class="avatar-wrap"><div class="avatar">💅</div></div>
   <p class="tagline">✦ Nail & Beauty ✦</p>
   <h1>Duyên Xinh <em>Channel</em></h1>
@@ -154,7 +70,6 @@ h1 em { font-style:italic; color:var(--soft); }
   <p class="footer">© 2026 Duyên Xinh Channel</p>
 </div>
 
-<!-- ══ PRODUCT POPUP ══ -->
 <div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
   <div class="popup" id="popup">
     <button class="popup-close" onclick="closePopup()">✕</button>
@@ -164,243 +79,43 @@ h1 em { font-style:italic; color:var(--soft); }
   </div>
 </div>
 
-<!-- ══ ADMIN PANEL ══ -->
-<div id="admin">
-  <h2>✦ Quản lý sản phẩm</h2>
-  <p class="admin-sub">Thay đổi sẽ hiển thị ngay cho khách hàng sau khi lưu.</p>
-
-  <div class="tab-bar">
-    <button class="tab active" onclick="switchTab('tools',this)">🪄 Dụng cụ</button>
-    <button class="tab" onclick="switchTab('gel',this)">✨ Sơn Gel</button>
-    <button class="tab" onclick="switchTab('deco',this)">🌸 Phụ kiện</button>
-  </div>
-
-  <!-- Tab: tools -->
-  <div class="admin-section active" id="tab-tools">
-    <div class="shop-link-row">
-      <p class="section-label">Link bộ sưu tập Shopee</p>
-      <input type="url" id="shoplink-tools" placeholder="https://shopee.vn/...">
-    </div>
-    <p class="section-label">Danh sách sản phẩm</p>
-    <div class="product-list" id="list-tools"></div>
-    <button class="add-btn" onclick="addItem('tools')">＋ Thêm sản phẩm</button>
-  </div>
-
-  <!-- Tab: gel -->
-  <div class="admin-section" id="tab-gel">
-    <div class="shop-link-row">
-      <p class="section-label">Link bộ sưu tập Shopee</p>
-      <input type="url" id="shoplink-gel" placeholder="https://shopee.vn/...">
-    </div>
-    <p class="section-label">Danh sách sản phẩm</p>
-    <div class="product-list" id="list-gel"></div>
-    <button class="add-btn" onclick="addItem('gel')">＋ Thêm sản phẩm</button>
-  </div>
-
-  <!-- Tab: deco -->
-  <div class="admin-section" id="tab-deco">
-    <div class="shop-link-row">
-      <p class="section-label">Link bộ sưu tập Shopee</p>
-      <input type="url" id="shoplink-deco" placeholder="https://shopee.vn/...">
-    </div>
-    <p class="section-label">Danh sách sản phẩm</p>
-    <div class="product-list" id="list-deco"></div>
-    <button class="add-btn" onclick="addItem('deco')">＋ Thêm sản phẩm</button>
-  </div>
-
-  <div class="admin-actions">
-    <button class="save-btn" id="save-btn" onclick="saveData()">💾 Lưu & Cập nhật ngay</button>
-    <button class="back-btn" onclick="showLanding()">← Xem trang khách hàng</button>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
 <script>
-// ── CONFIG ──
 const BIN_ID  = '69f8464caaba8821976b6274';
 const API_KEY = '$2a$10$BQhpwoo3yV2TnM16E6mk6.kpzEBjHP492VPDROQ9d21NbErzrcHx.';
 const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-const HEADERS = { 'Content-Type':'application/json', 'X-Master-Key': API_KEY };
-
-const CATS = ['tools','gel','deco'];
+const TITLES  = { tools:'🪄 Dụng cụ làm Nail', gel:'✨ Sơn Gel hot trend', deco:'🌸 Phụ kiện trang trí' };
 let DB = { tools:{shopLink:'',items:[]}, gel:{shopLink:'',items:[]}, deco:{shopLink:'',items:[]} };
-let currentPopupKey = '';
+let currentKey = '';
 
-// ── INIT ──
 async function init() {
-  await loadData();
-}
-
-// Nhấn giữ avatar 2 giây để vào Admin
-let holdTimer;
-const avatarEl = document.querySelector('.avatar');
-avatarEl.addEventListener('touchstart', () => {
-  holdTimer = setTimeout(() => {
-    const pw = prompt('Nhập mật khẩu quản trị:');
-    if (pw === 'duyen2026') { showAdmin(); renderAdmin(); }
-    else if (pw !== null) { alert('Sai mật khẩu!'); }
-  }, 2000);
-}, { passive:true });
-avatarEl.addEventListener('touchend',  () => clearTimeout(holdTimer));
-avatarEl.addEventListener('touchmove', () => clearTimeout(holdTimer));
-avatarEl.addEventListener('mousedown', () => {
-  holdTimer = setTimeout(() => {
-    const pw = prompt('Nhập mật khẩu quản trị:');
-    if (pw === 'duyen2026') { showAdmin(); renderAdmin(); }
-    else if (pw !== null) { alert('Sai mật khẩu!'); }
-  }, 2000);
-});
-avatarEl.addEventListener('mouseup',    () => clearTimeout(holdTimer));
-avatarEl.addEventListener('mouseleave', () => clearTimeout(holdTimer));
-
-// ── JSONBin ──
-async function loadData() {
   try {
-    const r = await fetch(API_URL+'/latest', { headers:{ 'X-Master-Key': API_KEY } });
+    const r = await fetch(API_URL+'/latest', { headers:{'X-Master-Key':API_KEY} });
     const j = await r.json();
     if (j.record) DB = j.record;
-  } catch(e) { console.warn('Load failed', e); }
+  } catch(e) {}
 }
-
-async function saveData() {
-  collectFromForm();
-  const btn = document.getElementById('save-btn');
-  btn.disabled = true; btn.innerHTML = '<span class="loading-dots">Đang lưu</span>';
-  try {
-    const r = await fetch(API_URL, { method:'PUT', headers:HEADERS, body:JSON.stringify(DB) });
-    if (!r.ok) throw new Error();
-    toast('✅ Đã lưu! Khách hàng thấy ngay rồi.');
-  } catch(e) { toast('❌ Lỗi kết nối, thử lại nhé.'); }
-  finally { btn.disabled=false; btn.textContent='💾 Lưu & Cập nhật ngay'; }
-}
-
-// ── VIEWS ──
-function showAdmin() {
-  document.getElementById('landing').style.display = 'none';
-  document.getElementById('admin').style.display = 'block';
-}
-function showLanding() {
-  document.getElementById('admin').style.display = 'none';
-  document.getElementById('landing').style.display = 'flex';
-}
-
-// ── ADMIN FORM ──
-function switchTab(key, el) {
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('tab-'+key).classList.add('active');
-}
-
-function renderAdmin() {
-  CATS.forEach(key => {
-    document.getElementById('shoplink-'+key).value = DB[key].shopLink || '';
-    const list = document.getElementById('list-'+key);
-    list.innerHTML = '';
-    (DB[key].items || []).forEach((_,i) => appendItemRow(key, i));
-  });
-}
-
-function appendItemRow(key, i) {
-  const item = (DB[key].items || [])[i] || {};
-  const list = document.getElementById('list-'+key);
-  const el = document.createElement('div');
-  el.className = 'product-entry';
-  el.dataset.idx = i;
-  el.innerHTML = `
-    <button class="del-btn" onclick="removeItem('${key}',${i})">🗑</button>
-    <div class="product-entry-grid">
-      <div class="field full">
-        <label>Tên sản phẩm</label>
-        <input type="text" name="name" value="${esc(item.name||'')}" placeholder="Ví dụ: Sơn gel đỏ cherry">
-      </div>
-      <div class="field">
-        <label>Giá bán</label>
-        <input type="text" name="price" value="${esc(item.price||'')}" placeholder="55.000đ">
-      </div>
-      <div class="field">
-        <label>Giá cũ (nếu có)</label>
-        <input type="text" name="old" value="${esc(item.old||'')}" placeholder="70.000đ">
-      </div>
-      <div class="field full">
-        <label>Link ảnh sản phẩm (copy từ Shopee)</label>
-        <input type="url" name="img" value="${esc(item.img||'')}" placeholder="https://down-vn.img.susercontent.com/...">
-      </div>
-      <div class="field full">
-        <label>Link sản phẩm Shopee</label>
-        <input type="url" name="link" value="${esc(item.link||'')}" placeholder="https://shopee.vn/...">
-      </div>
-    </div>`;
-  list.appendChild(el);
-}
-
-function addItem(key) {
-  if (!DB[key].items) DB[key].items = [];
-  DB[key].items.push({ name:'', price:'', old:'', img:'', link:'' });
-  const list = document.getElementById('list-'+key);
-  const i = DB[key].items.length - 1;
-  appendItemRow(key, i);
-  list.lastElementChild.scrollIntoView({ behavior:'smooth', block:'center' });
-}
-
-function removeItem(key, i) {
-  collectFromForm();
-  DB[key].items.splice(i, 1);
-  const list = document.getElementById('list-'+key);
-  list.innerHTML = '';
-  DB[key].items.forEach((_,idx) => appendItemRow(key, idx));
-}
-
-function collectFromForm() {
-  CATS.forEach(key => {
-    DB[key].shopLink = document.getElementById('shoplink-'+key).value.trim();
-    const rows = document.querySelectorAll(`#list-${key} .product-entry`);
-    DB[key].items = Array.from(rows).map(row => ({
-      name:  row.querySelector('[name=name]').value.trim(),
-      price: row.querySelector('[name=price]').value.trim(),
-      old:   row.querySelector('[name=old]').value.trim(),
-      img:   row.querySelector('[name=img]').value.trim(),
-      link:  row.querySelector('[name=link]').value.trim(),
-    }));
-  });
-}
-
-// ── LANDING POPUP ──
-const TITLES = { tools:'🪄 Dụng cụ làm Nail', gel:'✨ Sơn Gel hot trend', deco:'🌸 Phụ kiện trang trí' };
 
 function openPopup(key) {
-  currentPopupKey = key;
-  const cat = DB[key] || { items:[] };
+  currentKey = key;
+  const items = (DB[key]||{}).items || [];
   document.getElementById('popup-title').textContent = TITLES[key];
-  const items = cat.items || [];
   document.getElementById('popup-products').innerHTML = items.length
-    ? items.map(p => `
+    ? items.map(p=>`
         <a class="product-card" href="${p.link||'#'}" target="_blank" rel="noopener">
-          <div class="product-img">${p.img ? `<img src="${p.img}" alt="${esc(p.name)}" loading="lazy">` : '💅'}</div>
+          <div class="product-img">${p.img?`<img src="${p.img}" alt="${p.name}" loading="lazy">`:'💅'}</div>
           <div class="product-info">
-            <div class="product-name">${esc(p.name)}</div>
-            <div><span class="product-price">${esc(p.price)}</span>${p.old?`<span class="product-old">${esc(p.old)}</span>`:''}</div>
+            <div class="product-name">${p.name}</div>
+            <div><span class="product-price">${p.price}</span>${p.old?`<span class="product-old">${p.old}</span>`:''}</div>
           </div>
         </a>`).join('')
     : '<p style="grid-column:1/-1;text-align:center;color:var(--soft);font-size:.85rem;padding:20px 0">Chưa có sản phẩm nào.</p>';
   document.getElementById('overlay').classList.add('active');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
-
-function closePopup() { document.getElementById('overlay').classList.remove('active'); document.body.style.overflow=''; }
-function handleOverlayClick(e) { if(e.target===document.getElementById('overlay')) closePopup(); }
-function goShop() { const l=(DB[currentPopupKey]||{}).shopLink||'#'; window.open(l,'_blank','noopener'); }
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closePopup(); });
-
-// ── HELPERS ──
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
-function toast(msg) {
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 3000);
-}
-
+function closePopup(){ document.getElementById('overlay').classList.remove('active'); document.body.style.overflow=''; }
+function handleOverlayClick(e){ if(e.target===document.getElementById('overlay')) closePopup(); }
+function goShop(){ window.open((DB[currentKey]||{}).shopLink||'#','_blank','noopener'); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closePopup(); });
 init();
 </script>
 </body>
