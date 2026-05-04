@@ -229,10 +229,22 @@ let currentPopupKey = '';
 
 // ── INIT ──
 async function init() {
-  const isAdmin = location.search.includes('admin');
-  if (isAdmin) { showAdmin(); await loadData(); renderAdmin(); }
-  else { await loadData(); }
+  await loadData();
 }
+
+// Nhấn vào footer 5 lần liên tiếp để vào Admin
+let footerTaps = 0, footerTimer;
+document.querySelector('.footer').addEventListener('click', () => {
+  footerTaps++;
+  clearTimeout(footerTimer);
+  footerTimer = setTimeout(() => footerTaps = 0, 2000);
+  if (footerTaps >= 5) {
+    footerTaps = 0;
+    const pw = prompt('Nhập mật khẩu quản trị:');
+    if (pw === 'duyen2026') { showAdmin(); renderAdmin(); }
+    else if (pw !== null) { alert('Sai mật khẩu!'); }
+  }
+});
 
 // ── JSONBin ──
 async function loadData() {
